@@ -6,8 +6,8 @@
 const Loki = require('lokijs');
 let DB;
 let Users;
-let Pets;
-let Orders;
+//let Pets;
+//let Orders;
 let initialized = false;
 
 function createDb() {
@@ -24,8 +24,8 @@ function init() {
     initialized = true;
     let db = createDb();
     Users = db.addCollection('users', { indices: ['id','username'] });
-    Pets = db.addCollection('pets', { indices: ['id','name'] });
-    Orders = db.addCollection('orders', { indices: ['id','petid'] });
+    //Pets = db.addCollection('pets', { indices: ['id','name'] });
+    //Orders = db.addCollection('orders', { indices: ['id','petid'] });
 }
 
 function insertUser(user) {
@@ -34,7 +34,7 @@ function insertUser(user) {
         return;
     }
     if (user && user.username) {
-        let currUser = findByUsername(user.username);
+        let currUser = findUserByUsername(user.username);
         if (currUser && currUser.length > 0) {
             currUser = Object.assign(currUser[0], user);
             result = Users.update(currUser);
@@ -56,7 +56,7 @@ function findUserByUsername(username) {
     if(!Users) {
         return;
     }
-    return Users.find({'username': username})
+    return Users.find({'username': username});
 }
 
 module.exports = {

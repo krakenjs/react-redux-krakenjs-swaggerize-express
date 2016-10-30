@@ -1,4 +1,3 @@
-const Path = require('path');
 const Express = require('express');
 const Kraken = require('kraken-js');
 const InMemoryDB = require('./inmemorydb');

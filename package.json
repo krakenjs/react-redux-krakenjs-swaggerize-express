@@ -12,6 +12,10 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
+  "engines": {
+  	"node": "6",
+	"npm": "3"
+  },
   "dependencies": {
     "express": "^4.0.0",
     "kraken-js": "^2.1.0",
