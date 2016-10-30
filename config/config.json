@@ -1,0 +1,22 @@
+{
+    "middleware": {
+        "appsec": {
+            "enabled": false
+        },
+        "router": {
+            "enabled": true,
+            "priority": 120,
+            "module": {
+                "name": "swaggerize-express",
+                "arguments": [
+                    {
+                        "basedir": "path:./",
+                        "api": "path:./config/swagger.json",
+                        "handlers": "path:./handlers",
+                        "security": "path:./security"
+                    }
+                ]
+            }
+        }
+    }
+}

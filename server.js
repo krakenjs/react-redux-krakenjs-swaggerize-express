@@ -1,29 +1,18 @@
-'use strict';
+const Http = require('http');
+const App = require('./index');
 
-var Http = require('http');
-var Express = require('express');
-var BodyParser = require('body-parser');
-var Swaggerize = require('swaggerize-express');
-var Path = require('path');
+/*
+ * Create and start HTTP server.
+ */
+let Server = Http.createServer(App);
 
-var App = Express();
-
-var Server = Http.createServer(App);
-
-App.use(BodyParser.json());
-App.use(BodyParser.urlencoded({
-    extended: true
-}));
-
-App.use(Swaggerize({
-    api: Path.resolve('./config/swagger.json'),
-    handlers: Path.resolve('./handlers'),
-    security: Path.resolve('./security')
-}));
-
-Server.listen(8000, function () {
-    App.swagger.api.host = this.address().address + ':' + this.address().port;
+App.on('start', () => {
     /* eslint-disable no-console */
-    console.log('App running on %s:%d', this.address().address, this.address().port);
+    console.log('Application ready to serve requests.');
+    console.log('Environment: %s', App.kraken.get('env:env'));
+    Server.listen(process.env.PORT || 8000, function () {
+        //App.swagger.api.host = this.address().address + ':' + this.address().port;
+        console.log('App running on %s:%d', this.address().address, this.address().port);
+    });
     /* eslint-disable no-console */
 });
