@@ -15,6 +15,7 @@
   "dependencies": {
     "express": "^4.0.0",
     "kraken-js": "^2.1.0",
+    "lokijs": "^1.4.1",
     "swaggerize-express": "^4.0.0",
     "swagmock": "~0.0.2"
   },

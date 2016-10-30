@@ -1,7 +1,7 @@
 const Path = require('path');
 const Express = require('express');
 const Kraken = require('kraken-js');
-//const InMemoryDB = require('./inmemorydb');
+const InMemoryDB = require('./inmemorydb');
 
 let options = {
     onconfig: (config, next) => {
@@ -10,7 +10,7 @@ let options = {
          * This is a simplified db only for tutorial/examples
          * For real world use case use MongoDB or Redis to store/retrieve data.
          */
-        //InMemoryDB.init();
+        InMemoryDB.init();
         next(null, config);
     }
 };
