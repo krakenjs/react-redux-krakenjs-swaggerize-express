@@ -1,0 +1,32 @@
+{
+    "middleware": {
+        "webpack-dev": {
+            "module": {
+                "name": "webpack-dev-middleware",
+                "arguments": [
+                    "require:./webpack-util",
+                    {
+                        "publicPath": "/",
+                        "stats": {
+                            "colors": true,
+                            "chunks": false,
+                            "errors-only": true
+                        }
+                    }
+                ]
+            }
+        },
+        "webpack-hot-reload": {
+            "enabled": true,
+            "module": {
+                "name": "webpack-hot-middleware",
+                "arguments": [
+                    "require:./webpack-util"
+                ]
+            }
+        },
+        "static": {
+            "enabled": false
+        }
+    }
+}

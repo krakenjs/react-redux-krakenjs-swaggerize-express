@@ -15,5 +15,4 @@ let options = {
 };
 
 let App = module.exports = Express();
-
 App.use(Kraken(options));
