@@ -1,2 +1,5 @@
 coverage
 templates
+bundle
+client/polyfill.js
+client/vendor.js

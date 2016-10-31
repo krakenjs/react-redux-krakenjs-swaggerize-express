@@ -1,6 +1,7 @@
 const Express = require('express');
 const Kraken = require('kraken-js');
 const InMemoryDB = require('./inmemorydb');
+const Path = require('path');
 
 let options = {
     onconfig: (config, next) => {
@@ -15,4 +16,10 @@ let options = {
 };
 
 let App = module.exports = Express();
+//Root route to send the Index.html
+App.get('/', function (req, res) {
+    res.sendFile(Path.resolve(__dirname, 'web/index.html'));
+    return;
+});
+//Init Kraken
 App.use(Kraken(options));

@@ -22,7 +22,7 @@ module.exports = {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract(['css?sourceMap'])
             }
-       ]
+        ]
     },
     plugins: [
         new Webpack.optimize.CommonsChunkPlugin({
