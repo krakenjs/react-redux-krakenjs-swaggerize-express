@@ -11,16 +11,29 @@ module.exports = {
     module: {
         loaders: [
             {
+                test: /\.jsx?$/,
+                loader: 'babel',
+                include: [
+                    Path.resolve(__dirname, '../client'),
+                ]
+            },
+            {
                 test: /\.html$/,
                 loader: 'html'
             },
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract(['css?sourceMap', 'sass?sourceMap'])
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style',
+                    loader: ['css', 'sass']
+                })
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract(['css?sourceMap'])
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style',
+                    loader: 'css'
+                })
             }
         ]
     },
