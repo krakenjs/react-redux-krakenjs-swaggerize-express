@@ -2,7 +2,7 @@ const Webpack = require('webpack');
 const WebpackMerge = require('webpack-merge');
 const CommonConfig = require('./webpack-util/webpack.common');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
+//const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
 module.exports = WebpackMerge(CommonConfig, {
     entry: {
@@ -16,11 +16,11 @@ module.exports = WebpackMerge(CommonConfig, {
     plugins: [
         new ExtractTextPlugin('./bundle/[name].css'),
         new Webpack.NoErrorsPlugin(),
-        new Webpack.optimize.DedupePlugin(),
-        new Webpack.DefinePlugin({
-            'process.env': {
-                'ENV': JSON.stringify(ENV)
-            }
-        })
+        new Webpack.optimize.DedupePlugin()
+        // new Webpack.DefinePlugin({
+        //     'process.env': {
+        //         'ENV': JSON.stringify(ENV)
+        //     }
+        // })
     ]
 });
