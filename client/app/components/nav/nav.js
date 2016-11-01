@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router';
 import './nav.css';
 
 class Nav extends Component {
@@ -7,9 +8,9 @@ class Nav extends Component {
         return (
             <nav>
                 <ul className="navblock nav nav-pills pagenav">
-                    <li key="1" className="active"><a href="#">Home</a></li>
-                    <li key="2"><a href="#">Add Pet</a></li>
-                    <li key="3"><a href="#">Store</a></li>
+                    <li className="active" key="1" ><Link activeClassName="active" to="/">Home</Link></li>
+                    <li key="2"><Link activeClassName="active" to="addpet">Add Pet</Link></li>
+                    <li key="3"><Link activeClassName="active" to="cart">Cart</Link></li>
                 </ul>
             </nav>
         )

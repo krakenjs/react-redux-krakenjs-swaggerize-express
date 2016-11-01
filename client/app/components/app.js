@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './header/header';
 import Footer from './footer/footer';
 import Nav from './nav/nav';
-import Pets from './pets/pets';
+
 
 class App extends Component {
 
@@ -13,8 +13,7 @@ class App extends Component {
                 <div className="page-content">
                     <div className="wrapper">
                         <Nav/>
-                        <h1>Welcome to Pet store application!</h1>
-                        <Pets/>
+                        {this.props.children}
                     </div>
                 </div>
                 <Footer/>
