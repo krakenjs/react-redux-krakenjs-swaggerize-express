@@ -1,7 +1,7 @@
 const Express = require('express');
 const Kraken = require('kraken-js');
 const InMemoryDB = require('./lib/inmemorydb');
-const PetMock = require('./lib/inmemorydb/petMock');
+const PetMock = require('./lib/mocks/petMock');
 const Path = require('path');
 
 let options = {

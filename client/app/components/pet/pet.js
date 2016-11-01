@@ -4,11 +4,6 @@ class Pet extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            html_url: '',
-            avatar_url: '',
-            name: 'Brad'
-        };
         this.onClick = this.onClick.bind(this);
     }
     onClick() {
@@ -17,11 +12,11 @@ class Pet extends Component {
     render() {
         return (
             <div className="thumbnail">
-                <a href={this.state.html_url}>
-                    <img src={this.state.avatar_url} className="img-responsive" alt={this.state.name} width="200px"/>
+                <a href="/details">
+                    <img src={this.props.photoUrls[0]} className="img-responsive" alt={this.props.name} width="200px"/>
                 </a>
                 <div className="caption">
-                    <h4 className="text-center">{this.state.name}</h4>
+                    <h4 className="text-center">{this.props.name}</h4>
                     <button onClick={this.onClick} type="button" className="center-block btn btn-primary marg">Add to Cart</button>
                 </div>
 
