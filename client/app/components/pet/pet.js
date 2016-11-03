@@ -1,11 +1,32 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { Observable } from '@reactivex/rxjs';
 
 class Pet extends Component {
 
     constructor(props) {
         super(props);
         this.onClick = this.onClick.bind(this);
+        this.state = {
+            photoUrl: this.props.photoUrls[0]
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.photoUrls && this.props.photoUrls.length > 1) {
+            this.imageToggle = Observable.interval(2000)
+                .take(this.props.photoUrls.length)
+                .repeat(this.props.repeatCount)
+                .subscribe((x) => {
+                    this.setState({
+                        photoUrl: this.props.photoUrls[x]
+                    });
+                });
+        }
+    }
+
+    componentWillUnmount() {
+        this.imageToggle && this.imageToggle.unsubscribe();
     }
 
     onClick () {
@@ -15,7 +36,7 @@ class Pet extends Component {
         return (
             <div className="thumbnail">
                 <Link to={`/details/${this.props.name}`}>
-                    <img src={this.props.photoUrls[0]} className="img-responsive" alt={this.props.name} width="200px"/>
+                    <img src={this.state.photoUrl} className="img-responsive" alt={this.props.name} width="200px"/>
                 </Link>
                 <div className="caption">
                     <h4 className="text-center">{this.props.name}</h4>
@@ -26,4 +47,9 @@ class Pet extends Component {
         );
     }
 }
+
+Pet.defaultProps = {
+    repeatCount: 10
+};
+
 export default Pet
