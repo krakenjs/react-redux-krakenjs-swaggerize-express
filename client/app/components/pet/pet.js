@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 class Pet extends Component {
 
@@ -6,15 +7,16 @@ class Pet extends Component {
         super(props);
         this.onClick = this.onClick.bind(this);
     }
-    onClick() {
 
+    onClick () {
     }
+
     render() {
         return (
             <div className="thumbnail">
-                <a href="/details">
+                <Link to={`/details/${this.props.name}`}>
                     <img src={this.props.photoUrls[0]} className="img-responsive" alt={this.props.name} width="200px"/>
-                </a>
+                </Link>
                 <div className="caption">
                     <h4 className="text-center">{this.props.name}</h4>
                     <button onClick={this.onClick} type="button" className="center-block btn btn-primary marg">Add to Cart</button>
