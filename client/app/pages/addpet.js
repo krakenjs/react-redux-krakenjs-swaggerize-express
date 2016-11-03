@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import PetForm from '../components/pet_form/form';
 
 class AddPet extends Component {
     render() {
         return (
-            <h3>This is the AddPet page</h3>
+            <div>
+                <h2>Add your pet to the store</h2>
+                <PetForm/>
+            </div>
         )
     }
 }
