@@ -8,7 +8,7 @@ class PetForm extends Component {
         this.urls = new Subject();
         this.photoUrlChange = this.photoUrlChange.bind(this);
         this.nameChange = this.nameChange.bind(this);
-        this.addPet = this.addPet.bind(this);
+        this.formSubmit = this.formSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -41,22 +41,9 @@ class PetForm extends Component {
         });
     }
 
-    addPet(e) {
+    formSubmit(e) {
         e.preventDefault();
-        //TODO Input validation
-        fetch('/v2/pet', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: this.state.name,
-                photoUrls: [this.state.photoUrl],
-            })
-        })
-        .then(resp => console.log("API call", resp))
-        .catch(err => console.log(err));
+        this.props.addPet(this.state.name, this.state.photoUrl);
     }
 
     render() {
@@ -85,7 +72,7 @@ class PetForm extends Component {
 
                     <div className="form-group">
                         <div className="col-sm-offset-4 col-sm-8">
-                            <button onClick={this.addPet} type="submit" className="btn btn-default">Add Pet</button>
+                            <button onClick={this.formSubmit} type="submit" className="btn btn-default">Add Pet</button>
                         </div>
                     </div>
                 </form>
