@@ -8,8 +8,11 @@ let Success = (props) => {
     }
     return (
         <div>
-            <h2> Successfully added the Pet to the Store.</h2>
-            <a href="#" onClick={props.clearStatus} to="addPet">Add another Pet</a>
+
+            <div className="alert alert-success" role="alert">
+                <h3>Successfully added your Pet {props.name} to the Store.</h3>
+            </div>
+            <a href="#" onClick={props.clearStatus}>Add another Pet</a>
         </div>
     );
 };
@@ -51,7 +54,10 @@ class AddPet extends Component {
                 photoUrls: [photoUrl],
             })
         })
-        .then(resp => this.setState({success: true}))
+        .then(resp => this.setState({
+            name: name,
+            success: true
+        }))
         .catch(err => console.log(err));
     }
 
@@ -65,8 +71,8 @@ class AddPet extends Component {
     render() {
         return (
             <div>
-                <Success success={this.state.success} clearStatus={this.clearStatus}/>
-                <NewPet success={this.state.success} addPet={this.addPet}/>
+                <Success {...this.state} clearStatus={this.clearStatus}/>
+                <NewPet {...this.state} addPet={this.addPet}/>
             </div>
         )
     }
