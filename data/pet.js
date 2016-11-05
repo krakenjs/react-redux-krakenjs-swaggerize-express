@@ -9,10 +9,21 @@ module.exports = {
      * description: 
      * parameters: body
      * produces: application/xml, application/json
-     * responses: 405
+     * responses: 200, 405
      * operationId: addPet
      */
     post: {
+        200: function (req, res, callback) {
+            /**
+             * Using mock data generator module.
+             * Replace this by actual data for the api.
+             */
+            Mockgen().responses({
+                path: '/pet',
+                operation: 'post',
+                response: '200'
+            }, callback);
+        },
         405: function (req, res, callback) {
             /**
              * Using mock data generator module.
@@ -30,10 +41,21 @@ module.exports = {
      * description: 
      * parameters: body
      * produces: application/xml, application/json
-     * responses: 400, 404, 405
+     * responses: 200, 400, 404, 405
      * operationId: updatePet
      */
     put: {
+        200: function (req, res, callback) {
+            /**
+             * Using mock data generator module.
+             * Replace this by actual data for the api.
+             */
+            Mockgen().responses({
+                path: '/pet',
+                operation: 'put',
+                response: '200'
+            }, callback);
+        },
         400: function (req, res, callback) {
             /**
              * Using mock data generator module.

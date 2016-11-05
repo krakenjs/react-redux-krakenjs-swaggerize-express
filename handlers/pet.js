@@ -9,15 +9,15 @@ module.exports = {
      * description: 
      * parameters: body
      * produces: application/xml, application/json
-     * responses: 405
+     * responses: 200, 405
      */
     post: function addPet(req, res, next) {
         /**
-         * Get the data for response 405
+         * Get the data for response 200
          * For response `default` status 200 is used.
          */
-        var status = 405;
-        var provider = dataProvider['post']['405'];
+        var status = 200;
+        var provider = dataProvider['post']['200'];
         provider(req, res, function (err, data) {
             if (err) {
                 next(err);
@@ -31,15 +31,15 @@ module.exports = {
      * description: 
      * parameters: body
      * produces: application/xml, application/json
-     * responses: 400, 404, 405
+     * responses: 200, 400, 404, 405
      */
     put: function updatePet(req, res, next) {
         /**
-         * Get the data for response 400
+         * Get the data for response 200
          * For response `default` status 200 is used.
          */
-        var status = 400;
-        var provider = dataProvider['put']['400'];
+        var status = 200;
+        var provider = dataProvider['put']['200'];
         provider(req, res, function (err, data) {
             if (err) {
                 next(err);

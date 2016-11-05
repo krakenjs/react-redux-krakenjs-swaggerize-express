@@ -69,6 +69,12 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Pet"
+                        }
+                    },
                     "405": {
                         "description": "Invalid input"
                     }
@@ -109,6 +115,12 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Pet"
+                        }
+                    },
                     "400": {
                         "description": "Invalid ID supplied"
                     },

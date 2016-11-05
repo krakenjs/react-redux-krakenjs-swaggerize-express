@@ -30,7 +30,7 @@ Test('/pet', function (t) {
          * description: 
          * parameters: body
          * produces: application/xml, application/json
-         * responses: 405
+         * responses: 200, 405
          */
         t.test('test addPet post operation', function (t) {
             Mockgen().requests({
@@ -62,7 +62,15 @@ Test('/pet', function (t) {
                 }
                 request.end(function (err, res) {
                     t.error(err, 'No error');
-                    t.ok(res.statusCode === 405, 'Ok response status');
+                    t.ok(res.statusCode === 200, 'Ok response status');
+                    var Validator = require('is-my-json-valid');
+                    var validate = Validator(api.paths['/pet']['post']['responses']['200']['schema']);
+                    var response = res.body;
+                    if (Object.keys(response).length <= 0) {
+                        response = res.text;
+                    }
+                    t.ok(validate(response), 'Valid response');
+                    t.error(validate.errors, 'No validation errors');
                     t.end();
                 });
             });
@@ -71,7 +79,7 @@ Test('/pet', function (t) {
          * description: 
          * parameters: body
          * produces: application/xml, application/json
-         * responses: 400, 404, 405
+         * responses: 200, 400, 404, 405
          */
         t.test('test updatePet put operation', function (t) {
             Mockgen().requests({
@@ -103,7 +111,15 @@ Test('/pet', function (t) {
                 }
                 request.end(function (err, res) {
                     t.error(err, 'No error');
-                    t.ok(res.statusCode === 400, 'Ok response status');
+                    t.ok(res.statusCode === 200, 'Ok response status');
+                    var Validator = require('is-my-json-valid');
+                    var validate = Validator(api.paths['/pet']['put']['responses']['200']['schema']);
+                    var response = res.body;
+                    if (Object.keys(response).length <= 0) {
+                        response = res.text;
+                    }
+                    t.ok(validate(response), 'Valid response');
+                    t.error(validate.errors, 'No validation errors');
                     t.end();
                 });
             });
