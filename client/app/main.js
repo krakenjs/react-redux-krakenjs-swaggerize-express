@@ -5,7 +5,7 @@ import App from './components/app';
 import Home from './pages/home';
 import Cart from './pages/cart';
 import AddPet from './pages/addpet';
-import PetDetails from './pages/details';
+import Details from './pages/details';
 
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
@@ -16,6 +16,6 @@ ReactDOM.render((
             <IndexRoute component={Home}/>
             <Route path="/addpet" component={AddPet}/>
             <Route path="/cart" component={Cart}/>
-            <Route path="/details/:name" component={PetDetails}/>
+            <Route path="/details/:name" component={Details}/>
         </Route>
     </Router>), app);
