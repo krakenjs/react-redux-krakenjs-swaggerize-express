@@ -16,29 +16,19 @@ module.exports = {
      */
     get: {
         200: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
             let id = req.params.petId;
             let pets = InMemoryDB.findPetById(id);
 
             if (pets && pets.length > 0) {
                 pets = pets.map(pet => new PetModel(pet));
-                callback(null, {
-                    responses: pets[0]
-                });
-                return;
+            } else {
+                pets = [ {} ];
             }
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/pet/{petId}',
-                operation: 'get',
-                response: '200'
-            }, callback);
+
+            callback(null, {
+                responses: pets[0]
+            });
+            return;
         },
         400: function (req, res, callback) {
             /**

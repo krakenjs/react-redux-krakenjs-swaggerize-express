@@ -25,21 +25,13 @@ module.exports = {
                 pet = InMemoryDB.insertPet(pet);
                 if (pet) {
                     pet = new PetModel(pet);
-                    callback(null, {
-                        responses: pet
-                    });
-                    return;
                 }
+            } else {
+                pet = {};
             }
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/pet',
-                operation: 'post',
-                response: '200'
-            }, callback);
+            callback(null, {
+                responses: pet
+            });
         },
         405: function (req, res, callback) {
             /**

@@ -28,9 +28,12 @@ class Cart extends Component {
             }
         }
     }
+
+
+
     render() {
 
-        let carItems = this.state.pets.map(pet => <CartItem key={pet.id} {...pet}/>);
+        let carItems = this.state.pets.map(pet => (pet && pet.id) ? <CartItem key={pet.id} {...pet}/> : null);
 
         return (
             <div>
