@@ -16,6 +16,6 @@ ReactDOM.render((
             <IndexRoute component={Home}/>
             <Route path="/addpet" component={AddPet}/>
             <Route path="/cart" component={Cart}/>
-            <Route path="/details/:name" component={Details}/>
+            <Route path="/details/:id" component={Details}/>
         </Route>
     </Router>), app);

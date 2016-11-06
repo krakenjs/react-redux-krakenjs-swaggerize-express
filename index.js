@@ -13,9 +13,7 @@ let options = {
          */
         InMemoryDB.init();
         //Initialize the DB with dummy data.
-        PetMock().forEach(pet => {
-            InMemoryDB.insertPet(pet);
-        });
+        PetMock().forEach(pet => InMemoryDB.insertPet(pet));
         next(null, config);
     }
 };

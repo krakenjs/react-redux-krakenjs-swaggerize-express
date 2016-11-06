@@ -35,7 +35,7 @@ class Pet extends Component {
     render() {
         return (
             <div className="thumbnail">
-                <Link to={`/details/${this.props.name}`}>
+                <Link to={`/details/${this.props.id}`}>
                     <img src={this.state.photoUrl} className="img-responsive" alt={this.props.name} width="200px"/>
                 </Link>
                 <div className="caption">

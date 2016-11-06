@@ -15,11 +15,7 @@ class Home extends Component {
         //TODO Move to redux state management
         fetch(FIND_PETS_API)
             .then(resp => resp.json())
-            .then(resp => {
-                this.setState({
-                    pets: resp
-                });
-            })
+            .then(resp => this.setState({pets: resp}))
             .catch(error => console.log(error));
     }
 
