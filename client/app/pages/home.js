@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Pets from '../components/pets/pets';
-const FIND_PETS_API = '/v2/pet/findByStatus?status=available&status=sold&status=pending';
+const FIND_PETS_API = '/v2/pet/findByStatus?status=available&status=pending';
 
 class Home extends Component {
 
@@ -22,7 +22,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <h1>Welcome to Pet store application!</h1>
+                <h1>Welcome to Pet store!</h1>
                 <Pets {...this.state}/>
             </div>
         )

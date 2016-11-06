@@ -7,8 +7,8 @@ class Nav extends Component {
     render() {
         return (
             <nav>
-                <ul className="navblock nav nav-pills pagenav">
-                    <li className="active" key="1" ><Link onlyActiveOnIndex={true} activeClassName="active" to="/">Home</Link></li>
+                <ul id="petnav" className="navblock nav nav-pills pagenav">
+                    <li key="1" ><Link onlyActiveOnIndex={true} activeClassName="active" to="/">Home</Link></li>
                     <li key="2"><Link activeClassName="active" to="addpet">Add Pet</Link></li>
                     <li key="3"><Link activeClassName="active" to="cart">Cart</Link></li>
                 </ul>

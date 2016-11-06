@@ -2,3 +2,7 @@
     margin-left: 0px;
     margin-bottom: 30px;
 }
+#petnav a.active {
+    color: #fff;
+    background-color: #337ab7;
+}
