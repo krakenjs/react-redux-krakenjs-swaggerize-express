@@ -8,7 +8,7 @@ Swagger api [location](./config/swagger.json)
 
 ### Client side
 
-- [ ] [React](https://facebook.github.io/react/)
+- [x] [React](https://facebook.github.io/react/)
 - [ ] [Redux](https://github.com/rackt/redux)
 - [x] [Webpack 2](https://webpack.github.io)
 

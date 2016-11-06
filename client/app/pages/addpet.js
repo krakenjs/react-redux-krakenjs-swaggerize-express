@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import PetForm from '../components/pet_form/form';
+import PetDetails from '../components/pet_details/petdetails';
+import './pages.css';
 
 let Success = (props) => {
     if (!props.success) {
@@ -8,11 +10,11 @@ let Success = (props) => {
     }
     return (
         <div>
-
-            <div className="alert alert-success" role="alert">
-                <h3>Successfully added your Pet {props.name} to the Store.</h3>
+            <div className="alert alert-success alert-dismissible" role="alert">
+                <h3>Successfully added your Pet <strong>{props.name}</strong> to the Store.</h3>
             </div>
-            <a href="#" onClick={props.clearStatus}>Add another Pet</a>
+            <PetDetails {...props}/>
+            <button onClick={props.clearStatus} type="button" className="addpetmargin center-block btn btn-primary marg">Add another Pet</button>
         </div>
     );
 };
@@ -54,10 +56,8 @@ class AddPet extends Component {
                 photoUrls: [photoUrl],
             })
         })
-        .then(resp => this.setState({
-            name: name,
-            success: true
-        }))
+        .then(resp => resp.json())
+        .then(resp => this.setState(Object.assign(resp, { success: true })))
         .catch(err => console.log(err));
     }
 

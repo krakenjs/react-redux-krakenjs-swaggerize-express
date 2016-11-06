@@ -8,7 +8,7 @@ class Pet extends Component {
         super(props);
         this.onClick = this.onClick.bind(this);
         this.state = {
-            photoUrl: this.props.photoUrls[0]
+            photoUrl: (this.props.photoUrls && this.props.photoUrls.length > 0) ? this.props.photoUrls[0]: ''
         }
     }
 

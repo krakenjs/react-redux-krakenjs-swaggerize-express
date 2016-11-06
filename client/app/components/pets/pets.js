@@ -6,7 +6,9 @@ class Pets extends Component {
     addRow(rowNum) {
         let row = [];
         let startIndex = rowNum * this.props.thumbnailCount;
-        for(let i = startIndex; i < startIndex + this.props.thumbnailCount; i++) {
+        let endIndex = startIndex + this.props.thumbnailCount;
+        endIndex = (endIndex > this.props.pets.length) ? this.props.pets.length : endIndex;
+        for(let i = startIndex; i < endIndex; i++) {
             row.push(
                 <div key={i} className="col-sm-6 col-md-4">
                     <Pet {...this.props.pets[i]}/>
@@ -18,7 +20,7 @@ class Pets extends Component {
 
     pets() {
         let pets = [];
-        let rowCont = Math.floor(this.props.pets.length/this.props.thumbnailCount);
+        let rowCont = Math.ceil(this.props.pets.length/this.props.thumbnailCount);
         for(let i = 0; i < rowCont; i++) {
             pets.push(
                 <div key={i} className="row">
