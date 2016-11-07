@@ -28,6 +28,13 @@ export const cart = (currentAction, id) => dispatch => {
         id: id
     });
 }
+export const clearFromCart = (id) => dispatch => {
+    removeFromCart(id);
+    return dispatch({
+        type: ACTIONS.CLEAR_FROM_CART,
+        id: id
+    });
+}
 
 export const findPetsFromCart = () => dispatch => {
     let cart = getCart();

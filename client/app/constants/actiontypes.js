@@ -6,6 +6,7 @@ export const FIND_PETS_FROM_CART = 'FIND_PETS_FROM_CART';
 
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const CLEAR_FROM_CART = 'CLEAR_FROM_CART';
 
 export const ADD_PET = 'ADD_PET';
 export const ADD_NEW_PET = 'ADD_PET';

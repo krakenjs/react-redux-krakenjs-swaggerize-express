@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 
 class CartItem extends Component {
+
+    onClick () {
+        this.props.clearFromCart(this.props.id);
+    }
+
     render() {
         return (
             <tr>
@@ -11,7 +16,7 @@ class CartItem extends Component {
                     <strong>{this.props.name}</strong>
                 </td>
                 <td>
-                    <button type="button" className="btn btn-primary marg">Remove from Cart</button>
+                    <button onClick={this.onClick.bind(this)} type="button" className="btn btn-primary marg">Remove from Cart</button>
                 </td>
             </tr>
         )

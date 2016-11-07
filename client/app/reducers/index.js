@@ -32,6 +32,12 @@ const rootReducer = (state = { pets: [], pet: {} }, action) => {
             return {
                 pets: action.pets
             };
+        case ACTIONS.CLEAR_FROM_CART:
+            let clearCartState = ({
+                ...state
+            });
+            clearCartState.pets = clearCartState.pets.filter(pet => pet.id !== action.id);
+            return clearCartState;
         default:
             return state;
     }

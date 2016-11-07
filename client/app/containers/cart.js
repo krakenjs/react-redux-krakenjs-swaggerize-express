@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CartItem from '../components/cart/cartitem';
 import { connect as Connect } from 'react-redux';
-import { findPetsFromCart } from '../actions';
+import { findPetsFromCart, clearFromCart } from '../actions';
 
 class Cart extends Component {
 
@@ -11,7 +11,7 @@ class Cart extends Component {
 
     render() {
         let pets = this.props.pets;
-        let carItems = ( pets && pets.length > 0) ? (pets.map(pet => (pet && pet.id) ? <CartItem key={pet.id} {...pet}/> : null)) : null;
+        let carItems = ( pets && pets.length > 0) ? (pets.map(pet => (pet && pet.id) ? <CartItem key={pet.id} {...pet} clearFromCart={this.props.clearFromCart}/> : null)) : null;
 
         return (
             <div>
@@ -30,4 +30,4 @@ class Cart extends Component {
 const mapStateToProps = state => ({
     pets: state.pets
 });
-export default Connect(mapStateToProps, { findPetsFromCart })(Cart)
+export default Connect(mapStateToProps, { findPetsFromCart, clearFromCart })(Cart)

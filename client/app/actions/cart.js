@@ -26,7 +26,7 @@ export const addToCart = (id) => {
         let cart = getCart();
         if (cart) {
             //If the pet exist in the cart do nothing
-            if (inCart(id)) {
+            if (inCart(`${id}`)) {
                 return false;
             }
             //Add the separator
@@ -46,9 +46,9 @@ export const removeFromCart = (id) => {
     if (localStorage) {
         let cart = getCart();
         if (cart) {
-            if (inCart(id)) {
+            if (inCart(`${id}`)) {
                 let cartItems = cart.split(C.CART_SEPARATOR);
-                cartItems = cartItems.filter(id => id !== `${id}`);
+                cartItems = cartItems.filter(cartId => cartId !== `${id}`);
                 localStorage.setItem(C.CART_KEY, cartItems.join(C.CART_SEPARATOR));
                 return true;
             }
