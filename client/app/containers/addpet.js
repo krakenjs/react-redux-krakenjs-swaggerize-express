@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { connect as Connect } from 'react-redux';
+import { addPet, addNewPet } from '../actions';
+
 import PetForm from '../components/pet_form/form';
 import PetDetails from '../components/pet_details/petdetails';
 import './pages.css';
@@ -11,9 +13,9 @@ let Success = (props) => {
     return (
         <div>
             <div className="alert alert-success alert-dismissible" role="alert">
-                <h3>Successfully added your Pet <strong>{props.name}</strong> to the Store.</h3>
+                <h3>Successfully added your Pet <strong>{props.pet.name}</strong> to the Store.</h3>
             </div>
-            <PetDetails {...props}/>
+            <PetDetails {...props.pet}/>
             <button onClick={props.clearStatus} type="button" className="addpetmargin center-block btn btn-primary marg">Add another Pet</button>
         </div>
     );
@@ -35,46 +37,25 @@ class AddPet extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            success: false
-        }
-        this.addPet = this.addPet.bind(this);
         this.clearStatus = this.clearStatus.bind(this);
-    }
-
-    addPet(name, photoUrl) {
-
-        //TODO Input validation
-        fetch('/v2/pet', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: name,
-                photoUrls: [photoUrl],
-            })
-        })
-        .then(resp => resp.json())
-        .then(resp => this.setState(Object.assign(resp, { success: true })))
-        .catch(err => console.log(err));
     }
 
     clearStatus(e) {
         e.preventDefault();
-        this.setState({
-            success: false
-        });
+        this.props.addNewPet();
     }
 
     render() {
         return (
             <div>
-                <Success {...this.state} clearStatus={this.clearStatus}/>
-                <NewPet {...this.state} addPet={this.addPet}/>
+                <Success {...this.props} clearStatus={this.clearStatus}/>
+                <NewPet {...this.props}/>
             </div>
         )
     }
 }
-export default AddPet
+const mapStateToProps = (state) => ({
+    pet: state.pet,
+    success: state.pet.success
+});
+export default Connect(mapStateToProps, { addPet, addNewPet })(AddPet)

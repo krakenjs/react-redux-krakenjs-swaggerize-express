@@ -1,21 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import Thunk from 'redux-thunk';
+import { Router, browserHistory } from 'react-router';
 import './styles/main.scss';
-import App from './components/app';
-import Home from './pages/home';
-import Cart from './pages/cart';
-import AddPet from './pages/addpet';
-import Details from './pages/details';
+import Routes from './routes';
+import Reducer from './reducers';
+import { findAllPets } from './actions';
 
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+
+const store = createStore(Reducer, applyMiddleware(Thunk));
 
 const app = document.getElementById('app');
-ReactDOM.render((
-    <Router history={browserHistory}>
-        <Route path="/" component={App}>
-            <IndexRoute component={Home}/>
-            <Route path="/addpet" component={AddPet}/>
-            <Route path="/cart" component={Cart}/>
-            <Route path="/details/:id" component={Details}/>
-        </Route>
-    </Router>), app);
+ReactDOM.render(
+    <Provider store={store}>
+        <Router history={browserHistory} routes={Routes}></Router>
+    </Provider>,
+    app);
