@@ -1,8 +1,13 @@
 import * as C from '../constants';
 
+export const getCart = () => {
+    if (localStorage) {
+        return localStorage.getItem(C.CART_KEY);
+    }
+}
 export const inCart = (id) => {
     if (localStorage) {
-        let cart = localStorage.getItem(C.CART_KEY);
+        let cart = getCart();
         if (cart) {
             let cartItems = cart.split(C.CART_SEPARATOR);
             if (cartItems && cartItems.length > 0) {
@@ -18,7 +23,7 @@ export const inCart = (id) => {
 
 export const addToCart = (id) => {
     if (localStorage) {
-        let cart = localStorage.getItem(C.CART_KEY);
+        let cart = getCart();
         if (cart) {
             //If the pet exist in the cart do nothing
             if (inCart(id)) {
@@ -39,7 +44,7 @@ export const addToCart = (id) => {
 
 export const removeFromCart = (id) => {
     if (localStorage) {
-        let cart = localStorage.getItem(C.CART_KEY);
+        let cart = getCart();
         if (cart) {
             if (inCart(id)) {
                 let cartItems = cart.split(C.CART_SEPARATOR);

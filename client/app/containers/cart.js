@@ -1,39 +1,17 @@
 import React, { Component } from 'react';
 import CartItem from '../components/cart/cartitem';
-
-const FIND_PET_API = '/v2/pet/';
-const CART_SEPARATOR = ';';
-const CART_KEY = 'cart';
+import { connect as Connect } from 'react-redux';
+import { findPetsFromCart } from '../actions';
 
 class Cart extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            pets : []
-        };
-    }
-
     componentDidMount() {
-        //TODO Move to redux state management
-        if(localStorage) {
-            let cart = localStorage.getItem(CART_KEY);
-            if (cart) {
-                let cartItems = cart.split(CART_SEPARATOR);
-                let pets = cartItems.map(id => fetch(`${FIND_PET_API}${id}`));
-                Promise.all(pets)
-                    .then(responses => Promise.all(responses.map(resp => resp.json())))
-                    .then(responses => this.setState({pets: responses}))
-                    .catch(error => console.log(error));
-            }
-        }
+        this.props.findPetsFromCart();
     }
-
-
 
     render() {
-
-        let carItems = this.state.pets.map(pet => (pet && pet.id) ? <CartItem key={pet.id} {...pet}/> : null);
+        let pets = this.props.pets;
+        let carItems = ( pets && pets.length > 0) ? (pets.map(pet => (pet && pet.id) ? <CartItem key={pet.id} {...pet}/> : null)) : null;
 
         return (
             <div>
@@ -49,4 +27,7 @@ class Cart extends Component {
         )
     }
 }
-export default Cart
+const mapStateToProps = state => ({
+    pets: state.pets
+});
+export default Connect(mapStateToProps, { findPetsFromCart })(Cart)

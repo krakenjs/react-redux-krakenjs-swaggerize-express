@@ -28,6 +28,10 @@ const rootReducer = (state = { pets: [], pet: {} }, action) => {
                 return pet
             });
             return newState
+        case ACTIONS.FIND_PETS_FROM_CART:
+            return {
+                pets: action.pets
+            };
         default:
             return state;
     }
