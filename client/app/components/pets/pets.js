@@ -11,7 +11,7 @@ class Pets extends Component {
         for(let i = startIndex; i < endIndex; i++) {
             row.push(
                 <div key={i} className="col-sm-6 col-md-4">
-                    <Pet {...this.props.pets[i]}/>
+                    <Pet {...this.props.pets[i]} cart={this.props.cart}/>
                 </div>
             );
         }
@@ -20,13 +20,15 @@ class Pets extends Component {
 
     pets() {
         let pets = [];
-        let rowCont = Math.ceil(this.props.pets.length/this.props.thumbnailCount);
-        for(let i = 0; i < rowCont; i++) {
-            pets.push(
-                <div key={i} className="row">
-                    {this.addRow(i)}
-                </div>
-            );
+        if (this.props.pets && this.props.pets.length > 0) {
+            let rowCont = Math.ceil(this.props.pets.length/this.props.thumbnailCount);
+            for(let i = 0; i < rowCont; i++) {
+                pets.push(
+                    <div key={i} className="row">
+                        {this.addRow(i)}
+                    </div>
+                );
+            }
         }
         return pets;
     }
