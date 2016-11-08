@@ -25,14 +25,14 @@ export const cart = (currentAction, id) => dispatch => {
     return dispatch({
         type: newAction,
         cartText: cartText(newAction),
-        id: id
+        id
     });
 }
 export const clearFromCart = (id) => dispatch => {
     removeFromCart(id);
     return dispatch({
         type: ACTIONS.CLEAR_FROM_CART,
-        id: id
+        id
     });
 }
 

@@ -10,15 +10,15 @@ export const fetchPetById = (id) => fetch(`${SERVICES.FIND_PET_API}${id}`)
     .catch(error => console.log(error));
 
 
-export const addPet = (pet) => fetch(SERVICES.ADD_PET, {
+export const addPet = ({name, photoUrls}) => fetch(SERVICES.ADD_PET, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            name: pet.name,
-            photoUrls: pet.photoUrls,
+            name,
+            photoUrls
         })
     })
     .then(resp => resp.json())

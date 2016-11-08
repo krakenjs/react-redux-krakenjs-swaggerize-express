@@ -54,8 +54,8 @@ class AddPet extends Component {
         )
     }
 }
-const mapStateToProps = (state) => ({
-    pet: state.pet,
-    success: state.pet && state.pet.success
+const mapStateToProps = ({pet}) => ({
+    pet,
+    success: pet && pet.success
 });
 export default Connect(mapStateToProps, { addPet, addNewPet })(AddPet)

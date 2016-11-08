@@ -31,7 +31,5 @@ class Cart extends Component {
         )
     }
 }
-const mapStateToProps = state => ({
-    pets: state.pets
-});
-export default Connect(mapStateToProps, { findPetsFromCart, clearFromCart })(Cart)
+
+export default Connect(({pets}) => ({pets}), { findPetsFromCart, clearFromCart })(Cart)

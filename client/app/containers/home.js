@@ -19,8 +19,4 @@ class Home extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    pets: state.pets
-});
-
-export default Connect(mapStateToProps, { findAllPets, cart })(Home)
+export default Connect(({pets}) => ({pets}), { findAllPets, cart })(Home)
