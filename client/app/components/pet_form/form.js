@@ -43,7 +43,9 @@ class PetForm extends Component {
 
     formSubmit(e) {
         e.preventDefault();
-        this.props.addPet(this.state.name, this.state.photoUrl);
+        if (this.state.name && this.state.photoUrl) {
+            this.props.addPet(this.state.name, this.state.photoUrl);
+        }    
     }
 
     render() {

@@ -11,7 +11,11 @@ class Cart extends Component {
 
     render() {
         let pets = this.props.pets;
-        let carItems = ( pets && pets.length > 0) ? (pets.map(pet => (pet && pet.id) ? <CartItem key={pet.id} {...pet} clearFromCart={this.props.clearFromCart}/> : null)) : null;
+        if (!pets || pets.length <= 0) {
+            return (<div className="alert alert-danger" role="alert">Your cart is empty!</div>)
+        }
+
+        let carItems = (pets.map(pet => (pet && pet.id) ? <CartItem key={pet.id} {...pet} clearFromCart={this.props.clearFromCart}/> : null));
 
         return (
             <div>

@@ -10,7 +10,7 @@ class Pets extends Component {
         endIndex = (endIndex > this.props.pets.length) ? this.props.pets.length : endIndex;
         for(let i = startIndex; i < endIndex; i++) {
             row.push(
-                <div key={i} className="col-sm-6 col-md-4">
+                <div key={this.props.pets[i].id} className="col-sm-6 col-md-4">
                     <Pet {...this.props.pets[i]} cart={this.props.cart}/>
                 </div>
             );
