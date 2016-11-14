@@ -11,6 +11,7 @@ class Nav extends Component {
                     <li key="1" ><Link onlyActiveOnIndex={true} activeClassName="active" to="/">Home</Link></li>
                     <li key="2"><Link activeClassName="active" to="addpet">Add Pet</Link></li>
                     <li key="3"><Link activeClassName="active" to="cart">Cart</Link></li>
+                    <li style={{ float: 'right' }} key="4"><Link activeClassName="active" to="login">Login</Link></li>
                 </ul>
             </nav>
         )
