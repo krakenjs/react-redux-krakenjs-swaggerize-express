@@ -21,7 +21,8 @@
     "kraken-js": "^2.1.0",
     "lokijs": "^1.4.1",
     "swaggerize-express": "^4.0.0",
-    "swagmock": "~0.0.2"
+    "swagmock": "~0.0.2",
+    "wreck": "^10.0.0"
   },
   "devDependencies": {
     "@reactivex/rxjs": "^5.0.0-rc.1",

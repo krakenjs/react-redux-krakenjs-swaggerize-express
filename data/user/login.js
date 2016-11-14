@@ -7,7 +7,7 @@ module.exports = {
     /**
      * summary: Logs user into the system
      * description: 
-     * parameters: username, password
+     * parameters: 
      * produces: application/xml, application/json
      * responses: 200, 400
      * operationId: loginUser
