@@ -23,3 +23,7 @@ export const addPet = ({name, photoUrls}) => fetch(SERVICES.ADD_PET, {
     })
     .then(resp => resp.json())
     .catch(err => console.log(err));
+
+export const findUser = username => fetch(`${SERVICES.FIND_USER}/${username}`)
+    .then(resp => resp.json())
+    .catch(error => console.log(error));

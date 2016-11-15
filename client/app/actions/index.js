@@ -3,6 +3,7 @@ import * as SERVICES from '../constants/services';
 import * as C from '../constants';
 import { getCart, inCart, addToCart, removeFromCart } from './cart';
 import * as API from './api';
+import Cookie from 'react-cookie';
 
 const cartText = (action) => {
     if (action === ACTIONS.ADD_TO_CART) {
@@ -44,13 +45,13 @@ export const findPetsFromCart = () => dispatch => {
         return Promise.all(pets)
             .then(responses => dispatch({
                 type: ACTIONS.FIND_PETS_FROM_CART,
-                pets: responses
+                cart: responses
             }));
     }
 
     return dispatch({
         type: ACTIONS.FIND_PETS_FROM_CART,
-        pets: []
+        cart: []
     });
 }
 
@@ -83,3 +84,22 @@ export const addNewPet = () => dispatch => dispatch({
     type: ACTIONS.ADD_NEW_PET,
     pet: { success: false }
 });
+
+export const findUser = username => dispatch => API.findUser(username)
+    .then(resp => dispatch({
+        type: ACTIONS.FIND_USER,
+        user: resp
+    }));
+
+export const logout = () => dispatch => {
+    let loggedout = false;
+    let username = Cookie.load('username');
+    if (username) {
+        Cookie.remove('username', { path: '/' });
+        loggedout = true;
+    }
+    return dispatch({
+        type: ACTIONS.LOG_OUT,
+        loggedout
+    });
+};
