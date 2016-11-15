@@ -24,22 +24,23 @@ function githubAuth (req, redirectUrl, cb) {
     cb(null, redirectUrl);
 }
 
-function localAuth (req, cb) {
-    var username = req.cookies && req.cookies.username;
+function localAuth (req, res, cb) {
+    var username = req.query.username;
     var redirectUrl;
     if (username) {
         //Check the DB for the user.
         var provider = dataProvider['get']['200'];
         req.params.username = username;
-        provider(req, null, function (err, data) {
+        provider(req, res, function (err, data) {
             if (err) {
                 cb(err);
                 return;
             }
             var user = data.responses;
-            if (user.id) {
+            if (user.id && user.username) {
                 var host = (req.headers && req.headers.host) || `${req.hostname}:8000`;
                 //TODO Build the profile page
+                res.cookie('username', user.username);
                 redirectUrl = `${req.protocol}://${host}`;
             }
             cb(null, req, redirectUrl);
@@ -62,7 +63,7 @@ module.exports = {
     get: function loginUser(req, res, next) {
         Async.waterfall([
             function (callback) {
-                localAuth(req, callback);
+                localAuth(req, res, callback);
             },
             githubAuth,
         ], function (err, redirectUrl) {

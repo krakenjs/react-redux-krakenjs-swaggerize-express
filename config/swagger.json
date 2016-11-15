@@ -687,7 +687,15 @@
                     "application/xml",
                     "application/json"
                 ],
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "The name that needs to be fetched. Use user1 for testing. ",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "303": {
                         "description": "Redirect to auth url"
