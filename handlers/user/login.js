@@ -1,7 +1,53 @@
 'use strict';
-//var dataProvider = require('../../data/user/login.js');
+var dataProvider = require('../../data/user/{username}.js');
 var QueryString = require('querystring');
 const InMemoryDB = require('../../lib/inmemorydb');
+const UserModel = require('../../lib/models/user');
+const Async = require('async');
+
+function githubAuth (req, redirectUrl, cb) {
+    if (redirectUrl) {
+        //If redirectUrl is found by Local Auth, use that.
+        cb(null, redirectUrl);
+        return;
+    }
+    const authorizationUrl = req.app.kraken.get('github:authorizationUrl');
+    const client_id = req.app.kraken.get('api:client_id');
+    let host = (req.headers && req.headers.host) || `${req.hostname}:8000`;
+    let apiBasePath = req.app.swagger && req.app.swagger.api.basePath;
+    let redirect_uri = `${req.protocol}://${host}${apiBasePath}/authorize` ;
+    let str = QueryString.stringify({
+        client_id: client_id,
+        redirect_uri: redirect_uri
+    });
+    redirectUrl = `${authorizationUrl}?${str}`;
+    cb(null, redirectUrl);
+}
+
+function localAuth (req, cb) {
+    var username = req.cookies && req.cookies.username;
+    var redirectUrl;
+    if (username) {
+        //Check the DB for the user.
+        var provider = dataProvider['get']['200'];
+        req.params.username = username;
+        provider(req, null, function (err, data) {
+            if (err) {
+                cb(err);
+                return;
+            }
+            var user = data.responses;
+            if (user.id) {
+                var host = (req.headers && req.headers.host) || `${req.hostname}:8000`;
+                //TODO Build the profile page
+                redirectUrl = `${req.protocol}://${host}`;
+            }
+            cb(null, req, redirectUrl);
+        });
+        return;
+    }
+    cb(null, req, redirectUrl);
+}
 /**
  * Operations on /user/login
  */
@@ -11,40 +57,22 @@ module.exports = {
      * description:
      * parameters:
      * produces: application/xml, application/json
-     * responses: 200, 400
+     * responses: 303
      */
     get: function loginUser(req, res, next) {
-        /**
-         * Get the data for response 200
-         * For response `default` status 200 is used.
-         */
-        var status = 200;
-        var login = req.cookies && req.cookies.login;
-        var provider;
-        var redirectUrl;
-
-        if (login) {
-            //Check the DB for the user.
-            var user = InMemoryDB.findUserByLogin(login);
-            if (user && user.length > 0) {
-                var host = (req.headers && req.headers.host) || `${req.hostname}:8000`;
-                var redirect_uri = `${req.protocol}://${host}`;
-                //TODO Build the profile page
-                res.redirect(redirectUrl);
+        Async.waterfall([
+            function (callback) {
+                localAuth(req, callback);
+            },
+            githubAuth,
+        ], function (err, redirectUrl) {
+            if (err) {
+                next(err);
                 return;
             }
-        }
-        //Redirect to Github Auth
-        const authorizationUrl = req.app.kraken.get('github:authorizationUrl');
-        const client_id = req.app.kraken.get('api:client_id');
-        var host = (req.headers && req.headers.host) || `${req.hostname}:8000`;
-        var apiBasePath = req.app.swagger && req.app.swagger.api.basePath;
-        var redirect_uri = `${req.protocol}://${host}${apiBasePath}/authorize` ;
-        var str = QueryString.stringify({
-            client_id: client_id,
-            redirect_uri: redirect_uri
+            //Redirect
+            res.redirect(redirectUrl);
+            return;
         });
-        redirectUrl = `${authorizationUrl}?${str}`;
-        res.redirect(redirectUrl);
     }
 };

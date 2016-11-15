@@ -9,11 +9,11 @@ module.exports = {
      * description: 
      * parameters: 
      * produces: application/xml, application/json
-     * responses: 200, 400
+     * responses: 303
      * operationId: loginUser
      */
     get: {
-        200: function (req, res, callback) {
+        303: function (req, res, callback) {
             /**
              * Using mock data generator module.
              * Replace this by actual data for the api.
@@ -21,18 +21,7 @@ module.exports = {
             Mockgen().responses({
                 path: '/user/login',
                 operation: 'get',
-                response: '200'
-            }, callback);
-        },
-        400: function (req, res, callback) {
-            /**
-             * Using mock data generator module.
-             * Replace this by actual data for the api.
-             */
-            Mockgen().responses({
-                path: '/user/login',
-                operation: 'get',
-                response: '400'
+                response: '303'
             }, callback);
         }
     }

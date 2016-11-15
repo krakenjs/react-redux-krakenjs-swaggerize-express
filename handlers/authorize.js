@@ -2,6 +2,7 @@
 var dataProvider = require('../data/authorize.js');
 const Wreck = require('wreck');
 const InMemoryDB = require('../lib/inmemorydb');
+const UserModel = require('../lib/models/user');
 /**
  * Operations on /authorize
  */
@@ -58,8 +59,8 @@ module.exports = {
                             return;
                         }
                         var profile = JSON.parse(payload.toString());
-                        InMemoryDB.insertUser(profile);
-                        res.cookie('login', profile.login);
+                        InMemoryDB.insertUser(new UserModel(profile));
+                        res.cookie('username', profile.login);
                         //TODO Build the profile page
                         res.redirect(redirect_uri);
                     });

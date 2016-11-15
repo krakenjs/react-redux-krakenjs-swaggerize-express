@@ -30,7 +30,7 @@ Test('/user/login', function (t) {
          * description: 
          * parameters: 
          * produces: application/xml, application/json
-         * responses: 200, 400
+         * responses: 303
          */
         t.test('test loginUser get operation', function (t) {
             Mockgen().requests({
@@ -62,15 +62,7 @@ Test('/user/login', function (t) {
                 }
                 request.end(function (err, res) {
                     t.error(err, 'No error');
-                    t.ok(res.statusCode === 200, 'Ok response status');
-                    var Validator = require('is-my-json-valid');
-                    var validate = Validator(api.paths['/user/login']['get']['responses']['200']['schema']);
-                    var response = res.body;
-                    if (Object.keys(response).length <= 0) {
-                        response = res.text;
-                    }
-                    t.ok(validate(response), 'Valid response');
-                    t.error(validate.errors, 'No validation errors');
+                    t.ok(res.statusCode === 303, 'Ok response status');
                     t.end();
                 });
             });
