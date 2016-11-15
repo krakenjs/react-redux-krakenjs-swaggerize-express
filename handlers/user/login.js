@@ -39,9 +39,8 @@ function localAuth (req, res, cb) {
             var user = data.responses;
             if (user.id && user.username) {
                 var host = (req.headers && req.headers.host) || `${req.hostname}:8000`;
-                //TODO Build the profile page
                 res.cookie('username', user.username);
-                redirectUrl = `${req.protocol}://${host}`;
+                redirectUrl = `${req.protocol}://${host}/profile`;
             }
             cb(null, req, redirectUrl);
         });

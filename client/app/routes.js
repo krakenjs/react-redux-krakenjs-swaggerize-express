@@ -7,7 +7,8 @@ import Cart from './containers/cart';
 import AddPet from './containers/addpet';
 import Details from './containers/details';
 import Login from './containers/login';
-import Logout from './containers/Logout';
+import Logout from './containers/logout';
+import Profile from './containers/profile';
 
 export default <Route path="/" component={App}>
     <IndexRoute component={Home}/>
@@ -16,4 +17,5 @@ export default <Route path="/" component={App}>
     <Route path="/details/:id" component={Details}/>
     <Route path="/login" component={Login}/>
     <Route path="/logout" component={Logout}/>
+    <Route path="/profile" component={Profile}/>
 </Route>

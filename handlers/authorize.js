@@ -23,7 +23,7 @@ module.exports = {
         var code = req.query.code;
         if (code) {
             var host = (req.headers && req.headers.host) || `${req.hostname}:8000`;
-            var redirect_uri = `${req.protocol}://${host}` ;
+            var redirect_uri = `${req.protocol}://${host}/profile` ;
             const tokenUrl = req.app.kraken.get('github:tokenUrl');
             const profileUrl = req.app.kraken.get('github:profileUrl');
             const client_id = req.app.kraken.get('api:client_id');
@@ -61,7 +61,6 @@ module.exports = {
                         var profile = JSON.parse(payload.toString());
                         InMemoryDB.insertUser(new UserModel(profile));
                         res.cookie('username', profile.login);
-                        //TODO Build the profile page
                         res.redirect(redirect_uri);
                     });
                 }
