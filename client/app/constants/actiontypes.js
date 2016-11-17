@@ -14,3 +14,6 @@ export const ADD_NEW_PET = 'ADD_PET';
 export const CHECKOUT_REQUEST = 'CHECKOUT_REQUEST';
 export const CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS';
 export const CHECKOUT_FAILURE = 'CHECKOUT_FAILURE';
+
+export const FIND_USER = 'FIND_USER';
+export const LOG_OUT = 'LOG_OUT';

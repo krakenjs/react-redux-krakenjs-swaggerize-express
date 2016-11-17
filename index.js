@@ -19,11 +19,6 @@ let options = {
 };
 
 let App = module.exports = Express();
-//TODO: Move this as a meddleware
-//Root route to send the Index.html
-App.get('/', function (req, res) {
-    res.sendFile(Path.resolve(__dirname, 'web/index.html'));
-    return;
-});
+
 //Init Kraken
 App.use(Kraken(options));

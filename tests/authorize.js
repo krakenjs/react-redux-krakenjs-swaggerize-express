@@ -5,13 +5,13 @@ var BodyParser = require('body-parser');
 var Swaggerize = require('swaggerize-express');
 var Path = require('path');
 var Request = require('supertest');
-var Mockgen = require('../../data/mockgen.js');
+var Mockgen = require('../data/mockgen.js');
 var Parser = require('swagger-parser');
 /**
- * Test for /user/login
+ * Test for /authorize
  */
-Test('/user/login', function (t) {
-    var apiPath = Path.resolve(__dirname, '../../config/swagger.json');
+Test('/authorize', function (t) {
+    var apiPath = Path.resolve(__dirname, '../config/swagger.json');
     var App = Express();
     App.use(BodyParser.json());
     App.use(BodyParser.urlencoded({
@@ -19,22 +19,22 @@ Test('/user/login', function (t) {
     }));
     App.use(Swaggerize({
         api: apiPath,
-        handlers: Path.resolve(__dirname, '../../handlers'),
-        security: Path.resolve(__dirname, '../../security')
+        handlers: Path.resolve(__dirname, '../handlers'),
+        security: Path.resolve(__dirname, '../security')
     }));
     Parser.validate(apiPath, function (err, api) {
         t.error(err, 'No parse error');
         t.ok(api, 'Valid swagger api');
         /**
-         * summary: Logs user into the system
+         * summary: Authorize a user
          * description: 
-         * parameters: 
+         * parameters: code
          * produces: application/xml, application/json
-         * responses: 303
+         * responses: 200, 400
          */
-        t.test('test loginUser get operation', function (t) {
+        t.test('test authorizeUser get operation', function (t) {
             Mockgen().requests({
-                path: '/user/login',
+                path: '/authorize',
                 operation: 'get'
             }, function (err, mock) {
                 var request;
@@ -62,7 +62,15 @@ Test('/user/login', function (t) {
                 }
                 request.end(function (err, res) {
                     t.error(err, 'No error');
-                    t.ok(res.statusCode === 303, 'Ok response status');
+                    t.ok(res.statusCode === 200, 'Ok response status');
+                    var Validator = require('is-my-json-valid');
+                    var validate = Validator(api.paths['/authorize']['get']['responses']['200']['schema']);
+                    var response = res.body;
+                    if (Object.keys(response).length <= 0) {
+                        response = res.text;
+                    }
+                    t.ok(validate(response), 'Valid response');
+                    t.error(validate.errors, 'No validation errors');
                     t.end();
                 });
             });

@@ -32,4 +32,4 @@ class Cart extends Component {
     }
 }
 
-export default Connect(({pets}) => ({pets}), { findPetsFromCart, clearFromCart })(Cart)
+export default Connect(({cart}) => ({pets: cart}), { findPetsFromCart, clearFromCart })(Cart)

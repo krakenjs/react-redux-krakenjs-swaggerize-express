@@ -17,11 +17,13 @@
     "npm": "3"
   },
   "dependencies": {
+    "async": "^2.1.2",
     "express": "^4.0.0",
     "kraken-js": "^2.1.0",
     "lokijs": "^1.4.1",
     "swaggerize-express": "^4.0.0",
-    "swagmock": "~0.0.2"
+    "swagmock": "~0.0.2",
+    "wreck": "^10.0.0"
   },
   "devDependencies": {
     "@reactivex/rxjs": "^5.0.0-rc.1",
@@ -39,6 +41,7 @@
     "js-yaml": "^3.2.6",
     "node-sass": "^3.10.1",
     "react": "^15.3.2",
+    "react-cookie": "^0.4.8",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
     "react-router": "^3.0.0",

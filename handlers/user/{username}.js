@@ -6,7 +6,7 @@ var dataProvider = require('../../data/user/{username}.js');
 module.exports = {
     /**
      * summary: Get user by user name
-     * description: 
+     * description:
      * parameters: username
      * produces: application/xml, application/json
      * responses: 200, 400, 404

@@ -22,6 +22,37 @@
                     }
                 ]
             }
+        },
+        "web": {
+            "route": "/",
+            "enabled": true,
+            "priority": 140,
+            "module": {
+                "name": "path:./lib/middleware/web.js"
+            }
+        },
+        "notfound": {
+            "enabled": true,
+            "priority": 150,
+            "module": {
+                "name": "path:./lib/middleware/notfound.js"
+            }
+        },
+        "serverError": {
+            "enabled": true,
+            "priority": 160,
+            "module": {
+                "name": "path:./lib/middleware/errorbin.js"
+            }
         }
+    },
+    "github": {
+        "authorizationUrl": "https://github.com/login/oauth/authorize",
+        "tokenUrl": "https://github.com/login/oauth/access_token",
+        "profileUrl": "https://api.github.com/user"
+    },
+    "api": {
+        "client_id": "a17b8f37347b5968da83",
+        "client_secret": "7260bb69970a83a6ffdb83b812ce04ec15354b77"
     }
 }
